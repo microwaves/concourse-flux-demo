@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: concourse-db
+  namespace: concourse-flux-poc
+spec:
+  selector:
+    app: concourse-db
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432

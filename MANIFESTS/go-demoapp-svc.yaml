@@ -1,0 +1,31 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: go-demoapp
+  namespace: concourse-flux-poc
+spec:
+  selector:
+    app: go-demoapp
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: go-demoapp
+  namespace: concourse-flux-poc
+  labels:
+    app: go-demoapp
+spec:
+  rules:
+  - host: demoapp.minikube
+    http:
+      paths:
+      - backend:
+          serviceName: go-demoapp
+          servicePort: 8080
+status:
+  loadBalancer: {}

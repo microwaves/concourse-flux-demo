@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concourse-db
+  namespace: concourse-flux-poc
+  labels:
+    app: concourse-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: concourse-db
+  template:
+    metadata:
+      labels:
+        app: concourse-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: concourse
+        - name: POSTGRES_PASSWORD
+          value: concourse_pass
+        - name: POSTGRES_USER
+          value: concourse_user
+        - name: PGDATA
+          value: /database

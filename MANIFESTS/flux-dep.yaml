@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: flux
+  namespace: concourse-flux-poc
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: flux
+    spec:
+      serviceAccount: flux
+      volumes:
+      - name: git-key
+        secret:
+          secretName: flux-git-deploy
+          defaultMode: 0400
+
+      # This is a tmpfs used for generating SSH keys. In K8s >= 1.10,
+      # mounted secrets are read-only, so we need a separate volume we
+      # can write to.
+      - name: git-keygen
+        emptyDir:
+          medium: Memory
+
+      containers:
+      - name: flux
+        # There are no ":latest" images for flux. Find the most recent
+        # release or image version at https://quay.io/weaveworks/flux
+        # and replace the tag here.
+        image: quay.io/weaveworks/flux:1.9.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3030
+        volumeMounts:
+        - name: git-key
+          mountPath: /etc/fluxd/ssh # to match location given in image's /etc/ssh/config
+          readOnly: true
+        - name: git-keygen
+          mountPath: /var/fluxd/keygen # to match location given in image's /etc/ssh/config
+
+        args:
+        - --ssh-keygen-dir=/var/fluxd/keygen
+
+        # git setup
+        - --git-url=git@github.com:microwaves/concourse-flux-demo.git
+        - --git-branch=master
+        - --git-path=MANIFESTS

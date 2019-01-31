@@ -1,0 +1,31 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: concourse
+  namespace: concourse-flux-poc
+spec:
+  selector:
+    app: concourse
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: concourse
+  namespace: concourse-flux-poc
+  labels:
+    app: concourse
+spec:
+  rules:
+  - host: concourse.minikube
+    http:
+      paths:
+      - backend:
+          serviceName: concourse
+          servicePort: 8080
+status:
+  loadBalancer: {}

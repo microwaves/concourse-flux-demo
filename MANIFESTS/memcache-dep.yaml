@@ -1,0 +1,25 @@
+---
+# Memcache is used by the Flux daemon to cache container image metadata.
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: memcached
+  namespace: concourse-flux-poc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: memcached
+    spec:
+      containers:
+      - name: memcached
+        image: memcached:1.4.25
+        imagePullPolicy: IfNotPresent
+        args:
+        - -m 64
+        - -p 11211
+        - -vv
+        ports:
+        - name: clients
+          containerPort: 11211
