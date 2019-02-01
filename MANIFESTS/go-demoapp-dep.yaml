@@ -6,6 +6,8 @@ metadata:
   namespace: concourse-flux-poc
   labels:
     app: go-demoapp
+  annotations:
+    flux.weave.works/automated: 'true'
 spec:
   replicas: 2
   selector:
