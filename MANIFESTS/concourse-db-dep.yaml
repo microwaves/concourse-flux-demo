@@ -6,6 +6,9 @@ metadata:
   namespace: concourse-flux-poc
   labels:
     app: concourse-db
+  annotations:
+    flux.weave.works/locked_user: Stephano Z. <mail@szfs.eu>
+    flux.weave.works/locked: 'true'
 spec:
   replicas: 1
   selector:
