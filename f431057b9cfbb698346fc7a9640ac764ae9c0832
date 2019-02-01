@@ -1,0 +1,1 @@
+{"jobID":"ca07a9d6-336c-8140-f0b4-cafb792762f2","spec":{"type":"policy","cause":{"Message":"","User":"Stephano Z. \u003cmail@szfs.eu\u003e"},"spec":{"concourse-flux-poc:deployment/memcached":{"add":{"locked":"true","locked_msg":"","locked_user":"Stephano Z. \u003cmail@szfs.eu\u003e"},"remove":{}}}},"result":null}
