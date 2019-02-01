@@ -1,0 +1,1 @@
+{"jobID":"62856648-10f7-48f5-d6e1-53de9ad3ba50","spec":{"type":"policy","cause":{"Message":"","User":"Stephano Z. \u003cmail@szfs.eu\u003e"},"spec":{"concourse-flux-poc:deployment/concourse":{"add":{"locked":"true","locked_msg":"","locked_user":"Stephano Z. \u003cmail@szfs.eu\u003e"},"remove":{}}}},"result":null}
