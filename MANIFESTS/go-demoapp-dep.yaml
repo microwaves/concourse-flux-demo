@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: go-demoapp
-        image: microwaves/go-demoapp:0.2.14
+        image: microwaves/go-demoapp:0.2.15
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
