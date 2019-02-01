@@ -1,0 +1,1 @@
+{"jobID":"8d696f86-d025-1178-6cfc-3dac323f903b","spec":{"type":"policy","cause":{"Message":"","User":"Stephano Z. \u003cmail@szfs.eu\u003e"},"spec":{"concourse-flux-poc:deployment/go-demoapp":{"add":{"automated":"true"},"remove":{}}}},"result":null}
